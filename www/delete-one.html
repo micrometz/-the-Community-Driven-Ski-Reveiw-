@@ -1,0 +1,15 @@
+<html>
+<head>
+<script language="javascript">
+    window.addEventListener("load", deleteOne)
+    function deleteOne() {
+        params = (new URL(document.location)).searchParams
+        SkiAreaName = params.get("SkiAreaName")
+        fetch("http://localhost:7777/delete/"+SkiAreaName, {method:"DELETE"})
+        location.href="retrieve.html"
+    }
+</script>
+</head>
+<body>
+</body>
+</html>

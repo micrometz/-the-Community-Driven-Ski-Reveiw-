@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> CDSR: Update a Review </title>
+    <link href="styles/style1.css" rel="stylesheet">
+    <link href="styles/style2.css" rel="stylesheet">
+    <script language="javascript">
+        window.addEventListener("load", readAll);
+        function readAll() {
+            fetch("http://localhost:7777/retrieve") 
+            .then(response => response.json())
+            .then(function(data) {
+                data.forEach(row => updateList.innerHTML += 
+                    `Ski Area Name: ${row.SkiAreaName}<br>
+                    Home Resort: ${row.HomeResort ? 'Yes' : 'No'}<br>
+                    Town Name: ${row.TownName}<br>
+                    Slopeside: ${row.Slopeside ? 'Yes' : 'No'}<br>
+                    Month Visited: ${row.MonthVisited}<br>
+                    Snow Quality Rating: ${row.SnowQualityRating}<br>
+                    Crowded Rating: ${row.CrowdedRating}<br>
+                    Lift Infrastructure Rating: ${row.LiftInfrastructureRating}<br>
+                    Run Rating: ${row.RunRating}<br>
+                    Mountain Aesthetic Rating: ${row.MountainAestheticRating}<br>
+                    Food and Lodging Rating: ${row.FoodLodgingRating}<br>
+                    Ease of Access Rating: ${row.EaseOfAccessRating}<br>
+                    Would Return: ${row.WouldReturn}<br>
+                    Pros: ${row.Pros}<br>
+                    Cons: ${row.Cons}<br>
+                    Extra: ${row.Extra}<br><br>`);
+            })
+            .catch(error => console.error("Error fetching data: ", error));
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+            <ul>
+                <li><a href="index.html" class="Linkfront"> Main Page </a></li>
+                <li><a href="create.html" class="Linkfront"> Create a review for a Ski Area or Resort </a></li>
+                <li><a href="retrieve.html" class="Linkfront"> Look up a Ski Area or Resort</a></li>
+                <li><a href="update.html" class="Linkfront"> Update one of your Ski Review</a></li>
+                <li><a href="delete.html" class="Linkfront" > Delete one of your Ski Review</a></li>   
+            </ul>
+        </div>
+        <div class="meat">
+            <h1 class="Title"> Welcome to the Community Driven Ski Review </h1>
+            <img class="Img" src="images/Monarch.jpg">
+            <h2 class="Heading"> Want to change and update your own Review?</h2>
+            <div id="updateList"></div>
+        </div>
+    </div>
+</body>
+</html>

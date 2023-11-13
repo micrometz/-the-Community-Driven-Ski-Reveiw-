@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Ski Review</title>
+    <link href="styles/style1.css" rel="stylesheet">
+    <link href="styles/style2.css" rel="stylesheet">
+    <script language="javascript">
+        window.addEventListener("load", main);
+
+        function main() {
+            readOne();
+            btn.addEventListener("click", writeOne);
+        }
+
+        function readOne() {
+            params = (new URL(document.location)).searchParams;
+            id = params.get("guestid");
+            fetch("http://localhost:7777/retrieve-one/" + id)
+                .then(response => response.json())
+                .then(function(data) {
+                    skiAreaName.value = data.SkiAreaName;
+                    homeResort.checked = data.HomeResort;
+                    townName.value = data.TownName;
+                    slopeside.checked = data.Slopeside;
+                    skiMonth.value = data.MonthVisited;
+                    quality.value = data.SnowQualityRating;
+                    crowded.value = data.CrowdedRating;
+                    lift.value = data.LiftInfrastructureRating;
+                    run.value = data.RunRating;
+                    aesthetic.value = data.MountainAestheticRating;
+                    foodLodging.value = data.FoodLodgingRating;
+                    easeOfAccess.value = data.EaseOfAccessRating;
+                    returnSelect.value = data.WouldReturn;
+                    pros.value = data.Pros;
+                    cons.value = data.Cons;
+                    extra.value = data.Extra;
+                });
+        }
+
+        function writeOne() {
+            data = {
+                SkiAreaName: skiAreaName.value,
+                HomeResort: homeResort.checked,
+                TownName: townName.value,
+                Slopeside: slopeside.checked,
+                MonthVisited: skiMonth.value,
+                SnowQualityRating: quality.value,
+                CrowdedRating: crowded.value,
+                LiftInfrastructureRating: lift.value,
+                RunRating: run.value,
+                MountainAestheticRating: aesthetic.value,
+                FoodLodgingRating: foodLodging.value,
+                EaseOfAccessRating: easeOfAccess.value,
+                WouldReturn: returnSelect.value,
+                Pros: pros.value,
+                Cons: cons.value,
+                Extra: extra.value
+            };
+            fetch("http://localhost:7777/update", {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            location.href = "retrieve.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+          <ul>
+            <li><a href="index.html" class="Linkfront"> Main Page </a></li>
+            <li><a href="create.html" class="Linkfront"> Create a review for a Ski Area or Resort </a></li>
+            <li><a href="retrieve.html" class="Linkfront"> Look up a Ski Area or Resort</a></li>
+            <li><a href="update.html" class="Linkfront"> Update one of your Ski Reviews</a></li>
+            <li><a href="delete.html" class="Linkfront"> Delete one of your Ski Reviews</a></li>
+          </ul>
+        </div>
+    <div class="meat">   
+    <h1>Update Ski Review</h1>
+    <label class="Heading2"> Change the following information:</label><br><br>
+    <input type="text" id="skiAreaName" placeholder="Name of the Ski Area or Resort you went to" required class="MyTextFont TextWidth GhostWhiteBackground Paragraph"><br><br>
+    
+    <label class="MyTextFont TextWidth Heading2"> Is this your home Resort or Ski Area? </label><br>
+    <input type="checkbox" id="homeResort" class="MyTextFont GhostWhiteBackground Paragraph"> Yes <br><br>
+    
+    <input type="text" id="townName" placeholder="What was the name of the Town you stayed at" class="MyTextFont TextWidth GhostWhiteBackground Paragraph"><br><br>
+    
+    <label class="MyTextFont TextWidth Heading2"> Did you have Slopeside Lodging for your trip? </label><br>
+    <input type="checkbox" id="slopeside" class="MyTextFont GhostWhiteBackground Paragraph"> Yes <br><br>
+    
+    
+    <legend class="Heading2"> The Month you Visited the Ski Area or Resort: </legend>
+    <input type="month" id="skiMonth" required class="MyTextFont TextWidthSmall GhostWhiteBackground"><br><br>
+    
+    <legend class="Heading2">Out of 10, What was the Snow Quality of the Mountain</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="quality" name="Quality" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    <legend class="Heading2">Out of 10, How crowded was your visit?</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="crowded" name="crowded" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    <legend class="Heading2">Out of 10, Was there enough Lift infrastructure for the Mountain</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="7" /> 7
+      </label>
+      <label class= "Paragraph">
+        <input type="radio" id="lift" name="Lift" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="lift" name="Lift" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+        
+    <legend class="Heading2">Out of 10, What are the Runs like on the Mountain</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="run" name="Run" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    <legend class="Heading2">Out of 10, What is the Mountain Aesthetic like (The views) </legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="aesthetic" name="Aesthetic" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    <legend class="Heading2">Out of 10, What is the Food and Lodging like</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="food" name="MountainFoodLodging" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    <legend class="Heading2">Out of 10, What is the Ease of Access to get to the Mountain</legend>
+    <div class="rating">
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="1" /> 1
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="2" /> 2
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="3" /> 3
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="4" /> 4
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="5" /> 5
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="6" /> 6
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="7" /> 7
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="8" /> 8
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="9" /> 9
+      </label>
+      <label class="Paragraph">
+        <input type="radio" id="ease" name="EaseOfAccess" value="10" /> 10
+      </label>
+    </div>
+    <br><br>
+    
+    
+    <label for="returnSelect" class="Heading2">Would you go back:</label><br>
+    <select id="returnSelect" class="Paragraph">
+      <option class="Paragraph" value="Yes">Yes</option>
+      <option class="Paragraph" value="No">No</option>
+    </select><br><br>
+    
+    <label for="pros" class="Heading2">Tell us what you think the Pros of this Ski Area or Resort are:</label><br>
+    <textarea
+      id="pros"
+      rows="5"
+      placeholder="Add your thoughts on the Resort or Ski Area here"
+      class="MyTextFont TextWidth GhostWhiteBackground Paragraph"
+    ></textarea><br><br>
+    
+    <label for="cons" class="Heading2">Tell us what you think the Cons of this Ski Area or Resort are:</label><br>
+    <textarea
+      id="cons"
+      rows="5"
+      placeholder="Add your thoughts on the Resort or Ski Area here"
+      class="MyTextFont TextWidth GhostWhiteBackground Paragraph"
+    ></textarea><br><br>
+    
+    <label for="extra" class="Heading2">Is there anything extra you want to add about this Ski Area or Resort:</label><br>
+    <textarea
+      id="extra"
+      rows="5"
+      placeholder="Add your thoughts on the Resort or Ski Area here"
+      class="MyTextFont TextWidth GhostWhiteBackground Paragraph"
+    ></textarea><br><br>
+</body>
+</html>

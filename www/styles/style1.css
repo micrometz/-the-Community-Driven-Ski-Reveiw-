@@ -1,0 +1,11 @@
+.Title {font-family: serif; font-size: 32pt;text-transform: capitalize; color: black; text-shadow: 1px 1px 1px powderblue, 2px 2px 2px powderblue; text-align: center;}
+.Heading {font-family: serif; font-size: 24pt; color: black; text-align: center;}
+.Heading2 {font-family: serif; font-size: 18pt; color: black}
+.Paragraph {font-family: serif; font-size: 16pt; color: black;}
+.Linkfront {font-family: serif; font-size: 16pt; color: black; text-decoration: none;}
+.Img {width: 512px; display:block; margin: auto;}
+.BackgroundTextFont{font-family: serif; font-size: 16pt; color: black;}
+.GhostWhiteBackground{background: ghostwhite;}
+.TextWidth{width:25%}
+.TextWidthSmall{width:10%}
+.TextWidthLarge{width:50%}
